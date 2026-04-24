@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Fiber Doors – MG Windows & Doors, Coimbatore</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.intro-section{padding:80px 0;background:#fff;}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.intro-img{width:100%;height:440px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md);}
+.features-section{padding:72px 0;background:var(--grey-light);}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
+.feat-card{background:#fff;border-radius:14px;padding:28px;box-shadow:var(--shadow-sm);transition:all .3s ease;border-top:4px solid transparent;}
+.feat-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-top-color:var(--primary);}
+.feat-icon{width:54px;height:54px;background:#fce4e4;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--primary);font-size:1.3rem;transition:all .3s ease;}
+.feat-card:hover .feat-icon{background:var(--primary);color:#fff;}
+.feat-card h4{font-size:.97rem;font-weight:700;margin-bottom:7px;color:var(--dark);}
+.feat-card p{font-size:.83rem;color:var(--grey-text);line-height:1.6;}
+.gallery-strip{padding:72px 0;background:#fff;}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px;}
+.gallery-grid img{width:100%;height:200px;object-fit:cover;border-radius:10px;transition:transform .4s ease;cursor:pointer;}
+.gallery-grid img:hover{transform:scale(1.04);}
+.why-section{padding:72px 0;background:var(--grey-light);}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.why-img{width:100%;height:380px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md);}
+.apps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px;}
+.app-card{text-align:center;padding:26px 14px;background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);transition:all .3s ease;}
+.app-card:hover{background:#fce4e4;transform:translateY(-5px);}
+.app-icon{width:56px;height:56px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;color:#fff;font-size:1.3rem;}
+.app-card h4{font-size:.88rem;font-weight:700;color:var(--dark);}
+@media(max-width:900px){
+  .intro-grid,.why-grid{grid-template-columns:1fr;gap:36px;}
+  .intro-img,.why-img{height:260px;}
+  .features-grid{grid-template-columns:1fr 1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .apps-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){.features-grid{grid-template-columns:1fr;}.gallery-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=80&fit=crop&auto=format')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Fiber Doors</span></div>
+    <h1>Strong, Stylish & Smart Door Solutions</h1>
+    <p>Waterproof, termite-proof fiber doors crafted for everyday performance</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro-section" id="fiber-top">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="fade-up">
+        <img class="intro-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop&auto=format" alt="Fiber Doors"/>
+      </div>
+      <div class="fade-up">
+        <span class="section-label">Fiber Doors</span>
+        <h2 class="section-title">Strong, Stylish & Smart Door Solutions</h2>
+        <p style="color:var(--grey-text);line-height:1.78;font-size:.93rem;margin-bottom:14px">Our fiber doors are crafted to deliver durability, water resistance, and elegant design. Made using high-quality fiber-reinforced materials, these doors are a perfect alternative to traditional wooden doors.</p>
+        <p style="color:var(--grey-text);line-height:1.78;font-size:.93rem;margin-bottom:14px">They are ideal for both interior and exterior applications, offering long-lasting performance with minimal maintenance.</p>
+        <p style="color:var(--grey-text);line-height:1.78;font-size:.93rem;margin-bottom:24px">Fiber doors are engineered to withstand moisture, termites, and harsh weather conditions, making them highly reliable for modern homes and commercial spaces.</p>
+        <a href="contact.html#quote" class="btn-primary">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="container">
+    <div class="fade-up" style="text-align:center">
+      <span class="section-label">Key Benefits</span>
+      <h2 class="section-title">Why Fiber Doors are the Smart Choice</h2>
+      <p style="color:var(--grey-text);font-size:.95rem;max-width:580px;margin:12px auto 0;line-height:1.72">Combining the beauty of wood with the practicality of modern materials.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card fade-up"><div class="feat-icon"><i class="fas fa-tint-slash"></i></div><h4>100% Waterproof & Weather-Resistant</h4><p>Perfect for humid climates, bathrooms, and outdoor-facing entrances. Never warps, swells, or cracks due to moisture.</p></div>
+      <div class="feat-card fade-up"><div class="feat-icon"><i class="fas fa-bug"></i></div><h4>Termite-Proof & Corrosion-Free</h4><p>Unlike wood, fiber doors are completely immune to termite attacks and corrosion, ensuring lifelong protection.</p></div>
+      <div class="feat-card fade-up"><div class="feat-icon"><i class="fas fa-shield-alt"></i></div><h4>Strong & Durable Structure</h4><p>High-density fiber-reinforced core provides exceptional strength and impact resistance for years of reliable performance.</p></div>
+      <div class="feat-card fade-up"><div class="feat-icon"><i class="fas fa-tree"></i></div><h4>Wood-Like Finish with Modern Designs</h4><p>Available in a wide range of grain patterns and finishes that authentically replicate the warmth and beauty of natural wood.</p></div>
+      <div class="feat-card fade-up"><div class="feat-icon"><i class="fas fa-broom"></i></div><h4>Low Maintenance & Easy Cleaning</h4><p>Simply wipe clean with a damp cloth. No painting, varnishing, or periodic treatment needed — ever.</p></div>
+      <div class="feat-card fade-up"><div class="feat-icon"><i class="fas fa-tags"></i></div><h4>Cost-Effective vs Wooden Doors</h4><p>Get the premium wood look at a fraction of the cost — without the ongoing maintenance expenses of real wood.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<section class="gallery-strip">
+  <div class="container">
+    <div class="fade-up" style="text-align:center">
+      <span class="section-label">Fiber Door Gallery</span>
+      <h2 class="section-title">Design Inspirations</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&q=80&fit=crop&auto=format" alt="Fiber door style 1" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1560185008-b033106af5c3?w=400&q=80&fit=crop&auto=format" alt="Fiber door style 2" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&q=80&fit=crop&auto=format" alt="Fiber door bathroom" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80&fit=crop&auto=format" alt="Fiber door modern" loading="lazy"/>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why-section">
+  <div class="container">
+    <div class="why-grid">
+      <div class="fade-up">
+        <span class="section-label">Why Choose Fiber Doors?</span>
+        <h2 class="section-title">Fiber Doors Combine Strength with Style</h2>
+        <p style="color:var(--grey-text);line-height:1.78;font-size:.93rem;margin-bottom:22px">The ideal choice for modern Indian homes — especially in humid, coastal, or high-rainfall regions like Tamil Nadu.</p>
+        <div class="benefit-pill fade-up" style="margin-bottom:10px"><i class="fas fa-water"></i> Perfect for humid and wet areas</div>
+        <div class="benefit-pill fade-up" style="margin-bottom:10px"><i class="fas fa-infinity"></i> Long-lasting without warping or cracking</div>
+        <div class="benefit-pill fade-up" style="margin-bottom:10px"><i class="fas fa-tree"></i> Ideal replacement for traditional wood doors</div>
+        <div class="benefit-pill fade-up" style="margin-bottom:10px"><i class="fas fa-palette"></i> Available in multiple designs and finishes</div>
+        <br/>
+        <a href="contact.html#quote" class="btn-primary">Enquire Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="fade-up">
+        <img class="why-img" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=700&q=80&fit=crop&auto=format" alt="Fiber door interior"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section style="padding:72px 0;background:#fff;">
+  <div class="container">
+    <div class="fade-up" style="text-align:center">
+      <span class="section-label">Applications</span>
+      <h2 class="section-title">Where We Install Fiber Doors</h2>
+    </div>
+    <div class="apps-grid">
+      <div class="app-card fade-up"><div class="app-icon"><i class="fas fa-home"></i></div><h4>Residential Homes</h4></div>
+      <div class="app-card fade-up"><div class="app-icon"><i class="fas fa-bath"></i></div><h4>Bathrooms & Kitchens</h4></div>
+      <div class="app-card fade-up"><div class="app-icon"><i class="fas fa-building"></i></div><h4>Offices & Commercial Spaces</h4></div>
+      <div class="app-card fade-up"><div class="app-icon"><i class="fas fa-city"></i></div><h4>Apartments & Villas</h4></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <div class="container">
+    <h2>Interested in Premium Fiber Doors?</h2>
+    <p>Contact us for a free consultation and see our complete range of fiber door designs and finishes.</p>
+    <div class="cta-btns">
+      <a href="contact.html#quote" class="btn-primary" style="background:#fff;color:var(--primary);border-color:#fff">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+      <a href="tel:+919789585081" class="btn-outline-white"><i class="fas fa-phone-alt" style="display:inline-block;transform:scaleX(-1);"></i> Call Now</a>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="nav.js"></script><script src="shared.js"></script>
+</body>
+</html>

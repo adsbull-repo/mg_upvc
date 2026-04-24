@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact Us – MG Windows & Doors, Coimbatore</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+.contact-page{padding:80px 0 0;background:#fff;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:start;}
+.contact-info-wrap{}
+.ci-block{display:flex;gap:16px;margin-bottom:28px;padding:20px;background:var(--grey-light);border-radius:12px;transition:all .3s ease;}
+.ci-block:hover{background:#fce4e4;}
+.ci-icon{width:48px;height:48px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0;}
+.ci-text h4{font-size:.95rem;font-weight:700;margin-bottom:4px;color:var(--dark);}
+.ci-text p,.ci-text a{font-size:.88rem;color:var(--grey-text);line-height:1.6;}
+.ci-text a:hover{color:var(--primary);}
+.hours-card{background:var(--grey-light);border-radius:12px;padding:22px;}
+.hours-card h4{font-size:.9rem;font-weight:700;margin-bottom:14px;color:var(--dark);display:flex;align-items:center;gap:8px;}
+.hours-card h4 i{color:var(--primary);}
+.hour-row{display:flex;justify-content:space-between;font-size:.84rem;padding:7px 0;border-bottom:1px solid var(--grey-mid);color:var(--grey-text);}
+.hour-row:last-child{border-bottom:none;}
+.hour-row strong{color:var(--dark);}
+.badge-open{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:100px;}
+.form-section{background:var(--grey-light);border-radius:20px;padding:40px;}
+.form-section h3{font-size:1.35rem;font-weight:700;margin-bottom:6px;}
+.form-section .sub{font-size:.87rem;color:var(--grey-text);margin-bottom:26px;}
+#contact-form{display:flex;flex-direction:column;gap:14px;}
+.map-section{margin-top:80px;background:var(--grey-light);}
+.map-section .map-head{padding:52px 0 28px;text-align:center;}
+.map-embed{width:100%;height:380px;border:none;display:block;filter:grayscale(20%);}
+.contact-features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:64px;margin-bottom:80px;}
+.cf-card{text-align:center;padding:28px 16px;background:var(--grey-light);border-radius:14px;transition:all .3s ease;}
+.cf-card:hover{background:#fce4e4;transform:translateY(-4px);}
+.cf-icon{width:54px;height:54px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff;font-size:1.2rem;}
+.cf-card h4{font-size:.9rem;font-weight:700;margin-bottom:5px;color:var(--dark);}
+.cf-card p{font-size:.8rem;color:var(--grey-text);}
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr;gap:32px;}
+  .contact-features{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .contact-page{padding:48px 0 0;}
+  .contact-grid{gap:24px;}
+  .contact-features{grid-template-columns:1fr 1fr;gap:12px;}
+  .map-embed{height:240px;}
+  .form-section{padding:24px 16px;border-radius:14px;}
+  .form-section h3{font-size:1.1rem;}
+  .ci-block{padding:14px 12px;gap:12px;}
+  .ci-icon{width:40px;height:40px;font-size:.95rem;flex-shrink:0;}
+  .ci-text p,.ci-text a{font-size:.82rem;}
+  .hours-card{padding:16px 12px;}
+  [style*="display:flex;gap:10px"]{flex-direction:column !important;gap:10px !important;}
+  [style*="display:flex;gap:10px"] a{width:100%;justify-content:center;box-sizing:border-box;}
+  .form-row{flex-direction:column;gap:0;}
+  .cf-card{padding:18px 10px;}
+  .cf-icon{width:44px;height:44px;font-size:1rem;}
+  .cf-card h4{font-size:.82rem;}
+  .cf-card p{font-size:.74rem;}
+}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80&fit=crop&auto=format')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Contact</span></div>
+    <h1>Get in Touch With Us</h1>
+    <p>Looking for reliable window and door solutions? We're here to help.</p>
+  </div>
+</div>
+
+<section class="contact-page">
+  <div class="container">
+    <div class="contact-grid" id="quote">
+
+      <!-- Info -->
+      <div class="fade-up">
+        <span class="section-label">Contact Information</span>
+        <h2 class="section-title">Let's Build Something Beautiful Together</h2>
+        <p style="color:var(--grey-text);font-size:.93rem;line-height:1.78;margin-bottom:32px">Looking for reliable window and door manufacturers in Coimbatore? Get in touch with MG Windows for expert guidance, customized solutions, and competitive pricing.</p>
+
+        <div class="ci-block">
+          <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="ci-text">
+            <h4>Our Address</h4>
+            <p>SF No 27/1, Rathanagiri Road, Near PPG Engg College,<br>Vilankuruchi, Coimbatore – 641035, Tamil Nadu, India</p>
+          </div>
+        </div>
+
+        <div class="ci-block">
+          <div class="ci-icon"><i class="fas fa-phone-alt" style="transform:scaleX(-1);display:inline-block;"></i></div>
+          <div class="ci-text">
+            <h4>Phone Numbers</h4>
+            <a href="tel:+919789585081">+91 97895 85081</a>
+          </div>
+        </div>
+
+        <div class="ci-block">
+          <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+          <div class="ci-text">
+            <h4>Email Address</h4>
+            <a href="mailto:mgwindows11@gmail.com">mgwindows11@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="hours-card">
+          <h4><i class="fas fa-clock"></i> Working Hours</h4>
+          <div class="hour-row"><strong>Monday – Friday</strong><span>9:00 AM – 6:30 PM <span class="badge-open">Open</span></span></div>
+          <div class="hour-row"><strong>Saturday</strong><span>9:00 AM – 5:00 PM <span class="badge-open">Open</span></span></div>
+          <div class="hour-row"><strong>Sunday</strong><span style="color:#ef5350">By Appointment</span></div>
+        </div>
+
+        <div style="margin-top:24px;display:flex;gap:10px">
+          <a href="https://wa.me/919789585081" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:11px 20px;border-radius:8px;font-size:.88rem;font-weight:600;transition:all .3s ease">
+            <i class="fab fa-whatsapp fa-lg"></i> WhatsApp Us
+          </a>
+          <a href="tel:+919789585081" style="display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:11px 20px;border-radius:8px;font-size:.88rem;font-weight:600;transition:all .3s ease">
+            <i class="fas fa-phone-alt" style="transform:scaleX(-1);display:inline-block;"></i> Call Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="form-section fade-up">
+        <h3>Get Your Free Quote</h3>
+        <div class="sub">Fill in the details below — our team will respond within 24 hours.</div>
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="form-group"><label>Full Name *</label><input type="text" name="from_name" placeholder="Your full name" required/></div>
+            <div class="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
+          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" name="reply_to" placeholder="your@email.com"/></div>
+          <div class="form-group"><label>City / Area</label><input type="text" name="city" placeholder="e.g. Coimbatore, Erode, Salem…"/></div>
+          <div class="form-group"><label>Product Interest</label>
+            <select name="product">
+              <option value="">Select a product</option>
+              <option>uPVC Windows</option>
+              <option>uPVC Doors</option>
+              <option>Aluminium Windows</option>
+              <option>Aluminium Doors</option>
+              <option>Fiber Doors</option>
+              <option>Multiple / Full Project</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Project Type</label>
+            <select name="project_type">
+              <option value="">Select project type</option>
+              <option>New Construction</option>
+              <option>Renovation / Replacement</option>
+              <option>Commercial Project</option>
+              <option>Maintenance / Repair</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Your Message</label><textarea name="message" placeholder="Tell us about your project — number of windows/doors, dimensions, timeline, etc." style="min-height:110px"></textarea></div>
+          <button type="submit" id="contact-submit-btn" class="btn-primary" style="width:100%;justify-content:center;padding:15px;font-size:1rem">Send Enquiry <i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div id="contact-success" class="form-success">✅ Thank you for reaching out! We'll contact you within 24 hours for a free consultation.</div>
+      </div>
+    </div>
+
+    <!-- Why Contact features -->
+    <div class="contact-features">
+      <div class="cf-card fade-up"><div class="cf-icon"><i class="fas fa-map-marker-alt"></i></div><h4>Free Site Visit</h4><p>We visit your site to take accurate measurements at no charge.</p></div>
+      <div class="cf-card fade-up"><div class="cf-icon"><i class="fas fa-file-invoice"></i></div><h4>Transparent Quote</h4><p>Detailed itemized quotation with no hidden costs or surprises.</p></div>
+      <div class="cf-card fade-up"><div class="cf-icon"><i class="fas fa-clock"></i></div><h4>Fast Response</h4><p>Our team responds to all enquiries within 24 hours.</p></div>
+      <div class="cf-card fade-up"><div class="cf-icon"><i class="fas fa-shield-alt"></i></div><h4>No Commitment</h4><p>Consult with us freely — no obligation to purchase.</p></div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-section">
+    <div class="container">
+      <div class="map-head fade-up">
+        <span class="section-label">Find Us</span>
+        <h2 class="section-title">Visit Our Showroom</h2>
+        <p style="color:var(--grey-text);font-size:.95rem;margin-top:8px">SF No 27/1, Rathanagiri Road, Near PPG Engg College, Vilankuruchi, Coimbatore – 641035</p>
+      </div>
+    </div>
+    <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.1!2d77.0175317!3d11.0898286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8f824448f4d67%3A0x12516fca4f05b20f!2sPPG+Block+B%2C+Vilankurichi%2C+Saravanampatti%2C+Coimbatore%2C+Tamil+Nadu+641035!5e0!3m2!1sen!2sin!4v1680000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MG Windows & Doors Location"></iframe>
+  </div>
+</section>
+
+<div class="cta-banner" style="margin-top:0">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <p>Join 5000+ happy customers across Coimbatore who trust MG Windows & Doors.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/919789585081" target="_blank" class="btn-primary" style="background:#25d366;border-color:#25d366"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+      <a href="tel:+919789585081" class="btn-outline-white"><i class="fas fa-phone-alt" style="transform:scaleX(-1);display:inline-block;"></i> +91 97895 85081</a>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="nav.js"></script>
+<script src="shared.js"></script>
+<script>
+  emailjs.init({ publicKey: "x7GX6UgvExwSu4iUw" });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    const btn  = document.getElementById('contact-submit-btn');
+    const successBox = document.getElementById('contact-success');
+
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+
+      try {
+        await emailjs.sendForm("service_k4w2ua4", "template_vzoenve", form);
+
+        form.style.display = 'none';
+        if (successBox) successBox.style.display = 'block';
+
+      } catch (err) {
+        console.error('EmailJS error:', err);
+        btn.disabled = false;
+        btn.innerHTML = 'Send Enquiry <i class="fas fa-arrow-right"></i>';
+        alert('Sorry, something went wrong. Please try again or contact us directly.');
+      }
+    });
+  });
+</script>
+</body>
+</html>
