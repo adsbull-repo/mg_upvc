@@ -393,7 +393,7 @@
       </div>
       <div class="product-card" onclick="location.href='aluminium.html#alum-doors'">
         <div class="pc-img">
-          <img src="images index/aluminium door.jpg" alt="Aluminium Doors"/>
+          <img src="images index/aluminium door.png" alt="Aluminium Doors"/>
           <div class="pc-overlay"></div>
         </div>
         <div class="pc-body">
@@ -416,7 +416,7 @@
     <div class="prod-grid-1 fade-up">
       <div class="product-card" onclick="location.href='fiber.html'">
         <div class="pc-img">
-          <img src="images index/fiber door.jpg" alt="Fiber Doors"/>
+          <img src="images index/fiber door.png" alt="Fiber Doors"/>
           <div class="pc-overlay"></div>
         </div>
         <div class="pc-body">
@@ -435,9 +435,9 @@
 <div class="stats-strip" id="stats-strip">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item"><div class="stat-num" data-count="500" data-suffix="+">500+</div><div class="stat-lbl">Projects Completed</div></div>
-      <div class="stat-item"><div class="stat-num" data-count="8" data-suffix="+">8+</div><div class="stat-lbl">Years Experience</div></div>
-      <div class="stat-item"><div class="stat-num" data-count="500" data-suffix="+">500+</div><div class="stat-lbl">Happy Customers</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="5000" data-suffix="+">5000+</div><div class="stat-lbl">Projects Completed</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="10" data-suffix="+">10+</div><div class="stat-lbl">Years Experience</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="4800" data-suffix="+">4800+</div><div class="stat-lbl">Happy Customers</div></div>
       <div class="stat-item"><div class="stat-num" data-count="15" data-suffix="+">15+</div><div class="stat-lbl">Cities Served</div></div>
     </div>
   </div>
@@ -449,7 +449,7 @@
     <div class="about-grid">
       <div class="about-img-wrap fade-up">
         <img class="about-img" src="/images index/tshirt.png" alt="MG Windows & Doors team" />
-        <div class="about-badge"><strong>8+</strong><span>Years of Trust</span></div>
+        <div class="about-badge"><strong>10+</strong><span>Years of Trust</span></div>
       </div>
       <div class="fade-up">
         <span class="section-label">About MG Windows & Doors</span>
@@ -614,40 +614,39 @@
 </section>
 
 <!-- ══════════════ BLOG ══════════════ -->
+<?php
+// ── Dynamic Blog Section (latest 3 posts) ──
+require_once 'db.php';
+$blog_result = $conn->query("SELECT id, title, excerpt, image, tag, read_time, created_at FROM blogs ORDER BY created_at DESC LIMIT 3");
+?>
 <section id="blog">
   <div class="container">
     <div class="blog-hdr fade-up">
-      <div><span class="section-label">Latest Insights</span><h2 class="section-title">Latest Insights & Updates</h2></div>
-      <a href="blog.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      <div><span class="section-label">Latest Insights</span><h2 class="section-title">Latest Insights &amp; Updates</h2></div>
+      <a href="blog.php" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="blog-grid" id="blog-grid">
-      <div class="blog-card fade-up">
-        <div class="blog-img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80&fit=crop&auto=format" alt="uPVC vs Aluminium"/><span class="blog-tag">Guide</span></div>
-        <div class="blog-body">
-          <div class="blog-meta"><span class="bmeta"><i class="fas fa-calendar-alt"></i> Mar 20, 2025</span><span class="bmeta"><i class="fas fa-clock"></i> 5 min</span></div>
-          <h3>uPVC vs Aluminium Windows: Which Is Better for Your Home?</h3>
-          <p>Key differences in durability, energy efficiency, aesthetics and cost to help you make the right choice.</p>
-          <a href="blog.html" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+      <?php if ($blog_result && $blog_result->num_rows > 0): ?>
+        <?php while ($post = $blog_result->fetch_assoc()): ?>
+        <div class="blog-card fade-up">
+          <div class="blog-img">
+           <img src="uploads/<?php echo htmlspecialchars($post['image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>"/>
+            <span class="blog-tag"><?php echo htmlspecialchars($post['tag']); ?></span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="bmeta"><i class="fas fa-calendar-alt"></i> <?php echo date('M j, Y', strtotime($post['created_at'])); ?></span>
+              <span class="bmeta"><i class="fas fa-clock"></i> <?php echo htmlspecialchars($post['read_time']); ?></span>
+            </div>
+            <h3><?php echo htmlspecialchars($post['title']); ?></h3>
+            <p><?php echo htmlspecialchars(mb_strimwidth($post['excerpt'], 0, 120, '...')); ?></p>
+            <a href="blog-details.php?id=<?php echo $post['id']; ?>" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
-      </div>
-      <div class="blog-card fade-up">
-        <div class="blog-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fit=crop&auto=format" alt="South India Climate"/><span class="blog-tag">Tips</span></div>
-        <div class="blog-body">
-          <div class="blog-meta"><span class="bmeta"><i class="fas fa-calendar-alt"></i> Feb 10, 2025</span><span class="bmeta"><i class="fas fa-clock"></i> 4 min</span></div>
-          <h3>5 Reasons uPVC Windows Are Perfect for South India's Climate</h3>
-          <p>How uPVC handles extreme heat, heavy monsoons, and coastal humidity better than any alternative.</p>
-          <a href="blog.html" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-      <div class="blog-card fade-up">
-        <div class="blog-img"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80&fit=crop&auto=format" alt="Window Maintenance"/><span class="blog-tag">Maintenance</span></div>
-        <div class="blog-body">
-          <div class="blog-meta"><span class="bmeta"><i class="fas fa-calendar-alt"></i> Jan 5, 2025</span><span class="bmeta"><i class="fas fa-clock"></i> 3 min</span></div>
-          <h3>How to Maintain uPVC & Aluminium Windows for Maximum Lifespan</h3>
-          <p>Simple tips to keep your windows and doors looking brand new and functioning smoothly for decades.</p>
-          <a href="blog.html" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
+        <?php endwhile; ?>
+      <?php else: ?>
+        <p style="color:var(--grey-text);text-align:center;grid-column:1/-1;">No blog posts yet. Check back soon!</p>
+      <?php endif; ?>
     </div>
   </div>
 </section>

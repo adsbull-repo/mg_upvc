@@ -18,10 +18,15 @@
 .feat-card:hover .feat-icon{background:var(--primary);color:#fff;}
 .feat-card h4{font-size:.97rem;font-weight:700;margin-bottom:7px;color:var(--dark);}
 .feat-card p{font-size:.83rem;color:var(--grey-text);line-height:1.6;}
+
+/* Gallery – 2 doors + 2 windows */
 .gallery-strip{padding:72px 0;background:#fff;}
 .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px;}
-.gallery-grid img{width:100%;height:200px;object-fit:cover;border-radius:10px;transition:transform .4s ease;cursor:pointer;}
-.gallery-grid img:hover{transform:scale(1.04);}
+.gallery-item{position:relative;border-radius:10px;overflow:hidden;}
+.gallery-item img{width:100%;height:220px;object-fit:cover;display:block;transition:transform .4s ease;cursor:pointer;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-label{position:absolute;bottom:0;left:0;right:0;padding:8px 12px;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);color:#fff;font-size:.75rem;font-weight:600;letter-spacing:.5px;}
+
 .why-section{padding:72px 0;background:var(--grey-light);}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
 .why-img{width:100%;height:380px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md);}
@@ -44,7 +49,7 @@
 <div id="nav-placeholder"></div>
 
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=80&fit=crop&auto=format')"></div>
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1600&q=80&fit=crop&auto=format')"></div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Fiber Doors</span></div>
@@ -58,7 +63,8 @@
   <div class="container">
     <div class="intro-grid">
       <div class="fade-up">
-        <img class="intro-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop&auto=format" alt="Fiber Doors"/>
+        <!-- Fiber / modern front door -->
+        <img class="intro-img" src="/fiber/fiber main.png" alt="Fiber Door"/>
       </div>
       <div class="fade-up">
         <span class="section-label">Fiber Doors</span>
@@ -91,18 +97,34 @@
   </div>
 </section>
 
-<!-- GALLERY STRIP -->
+<!-- GALLERY STRIP — 2 Fiber Doors + 2 Fiber Windows -->
 <section class="gallery-strip">
   <div class="container">
     <div class="fade-up" style="text-align:center">
-      <span class="section-label">Fiber Door Gallery</span>
+      <span class="section-label">Fiber Door & Window Gallery</span>
       <h2 class="section-title">Design Inspirations</h2>
     </div>
     <div class="gallery-grid">
-      <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&q=80&fit=crop&auto=format" alt="Fiber door style 1" loading="lazy"/>
-      <img src="https://images.unsplash.com/photo-1560185008-b033106af5c3?w=400&q=80&fit=crop&auto=format" alt="Fiber door style 2" loading="lazy"/>
-      <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&q=80&fit=crop&auto=format" alt="Fiber door bathroom" loading="lazy"/>
-      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80&fit=crop&auto=format" alt="Fiber door modern" loading="lazy"/>
+      <!-- Fiber Door 1 — modern wood-grain style door -->
+      <div class="gallery-item fade-up">
+        <img src="data:image/jpeg;base64,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" alt="Fiber Door – Modern Style" loading="lazy"/>
+        
+      </div>
+      <!-- Fiber Door 2 — interior panel door -->
+      <div class="gallery-item fade-up">
+        <img src="/fiber/door.jpg" alt="Fiber Door – Interior Panel" loading="lazy"/>
+        
+      </div>
+      <!-- Fiber Window 1 — modern framed window -->
+      <div class="gallery-item fade-up">
+        <img src="/fiber/window.jpeg" alt="Fiber Window – Modern Frame" loading="lazy"/>
+        
+      </div>
+      <!-- Fiber Window 2 — large bright window interior -->
+      <div class="gallery-item fade-up">
+        <img src="/fiber/both.jpg" alt="Fiber Window – Bright Interior" loading="lazy"/>
+       
+      </div>
     </div>
   </div>
 </section>
@@ -123,7 +145,8 @@
         <a href="contact.html#quote" class="btn-primary">Enquire Now <i class="fas fa-arrow-right"></i></a>
       </div>
       <div class="fade-up">
-        <img class="why-img" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=700&q=80&fit=crop&auto=format" alt="Fiber door interior"/>
+        <!-- Modern interior door / home entrance -->
+        <img class="why-img" src="/fiber/last.png" alt="Fiber door interior"/>
       </div>
     </div>
   </div>

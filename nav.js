@@ -285,7 +285,7 @@ button[type="submit"].btn-primary {
   .header-inner .logo img{height:36px !important;}
 }
 </style>
-<div class="ann-bar">📞 Free site visit in Coimbatore &amp; surrounding areas — Call <strong>+91 97895 85081</strong></div>
+<div class="ann-bar">📞 Free site visit in Coimbatore &amp; surrounding areas — Call <strong>+91 97895 85081,+91 9865208281</strong></div>
 <header id="site-header">
   <div class="container header-inner">
     <a href="index.html" class="logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
@@ -428,6 +428,7 @@ const FOOTER_HTML = `
         <div class="ftr-contact">
           <div class="ftr-ci"><i class="fas fa-map-marker-alt"></i><span>SF No 27/1, Rathanagiri Road, Near PPG Engg College,<br>Vilankuruchi, Coimbatore – 641035</span></div>
           <div class="ftr-ci"><i class="fas fa-phone-alt" style="transform:scaleX(-1);display:inline-block;"></i><span><a href="tel:+919789585081">+91 97895 85081</a></span></div>
+          <div class="ftr-ci"><i class="fas fa-phone-alt" style="transform:scaleX(-1);display:inline-block;"></i><span><a href="tel:+919789585081">+91 9865208281</a></span></div>
           <div class="ftr-ci"><i class="fas fa-envelope"></i><span><a href="mailto:mgwindows11@gmail.com">mgwindows11@gmail.com</a></span></div>
           <div class="ftr-ci"><i class="fas fa-clock"></i><span>Mon – Sat: 9:00 AM – 6:30 PM</span></div>
         </div>
