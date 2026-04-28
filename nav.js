@@ -319,6 +319,7 @@ button[type="submit"].btn-primary {
             <li><a href="fiber.html">Fiber Doors</a></li>
           </ul>
         </li>
+        <li><a href="index.html#about" class="about-nav-link">About Us</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -370,6 +371,7 @@ button[type="submit"].btn-primary {
       </div>
     </li>
     <li class="mob-item"><a href="fiber.html" class="mob-nav-link">Fiber Doors</a></li>
+    <li class="mob-item"><a href="index.html#about" class="mob-nav-link about-nav-link">About Us</a></li>
     <li class="mob-item"><a href="gallery.html" class="mob-nav-link">Gallery</a></li>
     <li class="mob-item"><a href="blog.html" class="mob-nav-link">Blog</a></li>
     <li class="mob-item"><a href="contact.html" class="mob-nav-link">Contact</a></li>
@@ -403,6 +405,7 @@ const FOOTER_HTML = `
         <h4>Quick Links</h4>
         <div class="ftr-links">
           <a href="index.html">Home</a>
+          <a href="index.html#about">About Us</a>
           <a href="upvc-doors.html">uPVC Doors</a>
           <a href="aluminium-doors.html">Aluminium Doors</a>
           <a href="upvc-windows.html">uPVC Windows</a>
@@ -446,3 +449,30 @@ const FOOTER_HTML = `
 
 document.getElementById('nav-placeholder').innerHTML = NAV_HTML;
 document.getElementById('footer-placeholder').innerHTML = FOOTER_HTML;
+
+// ── SMOOTH SCROLL for About Us nav link ──
+// Works on index.html (same page) AND on other pages (redirects to index.html#about)
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('.about-nav-link');
+  if (!link) return;
+
+  const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+
+  if (isHomePage) {
+    e.preventDefault();
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Close mobile nav if open
+      const mobNav = document.getElementById('mob-nav');
+      const mobOver = document.getElementById('mob-overlay');
+      const hamburger = document.getElementById('hamburger');
+      if (mobNav) mobNav.classList.remove('open');
+      if (mobOver) mobOver.classList.remove('open');
+      if (hamburger) hamburger.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+  // On other pages: let the default href="index.html#about" navigate normally,
+  // and shared.css html{scroll-behavior:smooth} handles the scroll on arrival.
+});
