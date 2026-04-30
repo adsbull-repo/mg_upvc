@@ -299,6 +299,7 @@ button[type="submit"].btn-primary {
     <nav>
       <ul class="desk-nav" id="main-nav">
         <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about" class="about-nav-link">About Us</a></li>
         <li>
           <a href="#">Products <i class="fas fa-chevron-down chev"></i></a>
           <ul class="drop">
@@ -319,7 +320,6 @@ button[type="submit"].btn-primary {
             <li><a href="fiber.html">Fiber Doors</a></li>
           </ul>
         </li>
-        <li><a href="index.html#about" class="about-nav-link">About Us</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -354,6 +354,7 @@ button[type="submit"].btn-primary {
   </div>
   <ul class="mob-links">
     <li class="mob-item"><a href="index.html" class="mob-nav-link">Home</a></li>
+    <li class="mob-item"><a href="index.html#about" class="mob-nav-link about-nav-link">About Us</a></li>
     <li class="mob-item">
       <button class="mob-toggle" data-target="mob-doors">Doors <i class="fas fa-chevron-down"></i></button>
       <div class="mob-sub" id="mob-doors">
@@ -371,7 +372,6 @@ button[type="submit"].btn-primary {
       </div>
     </li>
     <li class="mob-item"><a href="fiber.html" class="mob-nav-link">Fiber Doors</a></li>
-    <li class="mob-item"><a href="index.html#about" class="mob-nav-link about-nav-link">About Us</a></li>
     <li class="mob-item"><a href="gallery.html" class="mob-nav-link">Gallery</a></li>
     <li class="mob-item"><a href="blog.html" class="mob-nav-link">Blog</a></li>
     <li class="mob-item"><a href="contact.html" class="mob-nav-link">Contact</a></li>

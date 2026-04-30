@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>MG Windows & Doors – Premium uPVC & Aluminium in Coimbatore</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="stylesheet" href="shared.css"/>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 
 /* ══ HERO CAROUSEL ══ */
@@ -21,7 +23,6 @@
 .slide-content h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.8vw,3rem);font-weight:800;line-height:1.18;margin-bottom:14px;text-shadow:0 2px 20px rgba(0,0,0,.4);}
 .slide-content p{font-size:clamp(.85rem,1.5vw,1rem);line-height:1.7;color:rgba(255,255,255,.87);margin-bottom:28px;max-width:480px;}
 .slide-btns{display:flex;gap:12px;flex-wrap:wrap;}
-/* Uniform size for all carousel buttons */
 .slide-btns .btn-primary,
 .slide-btns .btn-outline-white{
   min-width:200px;
@@ -31,8 +32,6 @@
   min-height:48px !important;
   box-sizing:border-box !important;
 }
-
-/* Carousel arrows — hidden on mobile */
 .car-prev,.car-next{position:absolute;top:50%;z-index:10;transform:translateY(-50%);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;font-size:1rem;}
 .car-prev{left:22px;}.car-next{right:22px;}
 .car-prev:hover,.car-next:hover{background:var(--primary);border-color:var(--primary);transform:translateY(-50%) scale(1.08);}
@@ -50,7 +49,7 @@
 .about-badge span{font-size:.76rem;font-weight:500;opacity:.9;}
 .bullets-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px;}
 
-/* ══ PRODUCTS — Clean grid, no ghost cells ══ */
+/* ══ PRODUCTS ══ */
 #products{padding:92px 0;background:var(--grey-light);}
 .cat-header{display:flex;align-items:center;gap:14px;margin:48px 0 18px;}
 .cat-header:first-of-type{margin-top:0;}
@@ -61,48 +60,40 @@
 .cat-label{flex:1;}
 .cat-label small{display:block;font-size:.68rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--grey-text);margin-bottom:2px;}
 .cat-label strong{display:block;font-size:1.08rem;font-weight:700;color:var(--dark);}
-/* No count badge */
-
-/* Auto-fill grid: fills space perfectly, no orphan whitespace */
 .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
-/* 2-item row (uPVC, Aluminium) — force 2 cols on desktop */
 .prod-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
-/* 1-item row (Fiber) */
 .prod-grid-1{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
 
-/* ══ WHY CHOOSE MG — Flip Cards ══ */
+.product-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-sm);transition:all 0.3s ease;cursor:default;display:flex;flex-direction:column;height:100%;}
+.pc-img{position:relative;width:100%;padding-top:75%;background:#f5f7fa;overflow:hidden;}
+.pc-img img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;background:#fff;transition:transform 0.4s ease;padding:12px;cursor:pointer;}
+.product-card:hover .pc-img img{transform:scale(1.02);}
+.pc-overlay{position:absolute;inset:0;pointer-events:none;}
+.pc-body{padding:20px 18px 22px;flex:1;display:flex;flex-direction:column;}
+.pc-tag{background:var(--grey-light);color:var(--primary);font-size:.65rem;font-weight:700;padding:4px 12px;border-radius:60px;display:inline-block;width:fit-content;margin-bottom:12px;text-transform:uppercase;}
+.pc-body h3{font-size:1.16rem;font-weight:700;margin-bottom:8px;color:var(--dark);}
+.pc-body p{font-size:.8rem;color:var(--grey-text);line-height:1.55;margin-bottom:18px;flex:1;}
+.pc-link{font-size:.78rem;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:6px;transition:gap 0.2s;margin-top:auto;width:fit-content;cursor:pointer;}
+.product-card:hover .pc-link{gap:10px;}
+
+/* Lightbox */
+.lightbox-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.94);backdrop-filter:blur(12px);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;visibility:hidden;opacity:0;transition:visibility 0.2s, opacity 0.2s;}
+.lightbox-overlay.active{visibility:visible;opacity:1;}
+.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:2px solid rgba(255,255,255,0.2);}
+.lightbox-close{position:absolute;top:24px;right:32px;color:#fff;font-size:2rem;cursor:pointer;background:rgba(0,0,0,0.5);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:0.2s;}
+.lightbox-close:hover{background:var(--primary);transform:scale(1.05);}
+
+/* ══ WHY CHOOSE MG ══ */
 #why{padding:92px 0;background:#fff;}
 .why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
-
-/* Flip card wrapper */
 .why-card{perspective:900px;min-height:220px;cursor:default;}
-.why-inner{position:relative;width:100%;height:100%;min-height:220px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);}
+.why-inner{position:relative;width:100%;min-height:220px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);}
 .why-card:hover .why-inner{transform:rotateY(180deg);}
-
-/* Front face */
-.why-front,.why-back{
-  position:absolute;inset:0;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  border-radius:14px;
-  padding:26px 18px;
-  text-align:center;
-}
-.why-front{
-  background:var(--grey-light);
-  border-top:4px solid var(--primary);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-}
+.why-front,.why-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px 18px;text-align:center;}
+.why-front{background:var(--grey-light);border-top:4px solid var(--primary);display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .why-icon{width:58px;height:58px;background:#fce4e4;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.4rem;color:var(--primary);}
 .why-front h3{font-size:.92rem;font-weight:700;color:var(--dark);line-height:1.4;}
-
-/* Back face */
-.why-back{
-  background:var(--primary);
-  transform:rotateY(180deg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;
-}
+.why-back{background:var(--primary);transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
 .why-back .back-icon{font-size:1.8rem;color:rgba(255,255,255,.7);}
 .why-back h3{font-size:.92rem;font-weight:700;color:#fff;line-height:1.3;}
 .why-back p{font-size:.82rem;color:rgba(255,255,255,.88);line-height:1.6;}
@@ -121,7 +112,7 @@
 /* ══ BLOG ══ */
 #blog{padding:92px 0;background:#fff;}
 .blog-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;}
-.view-all{font-size:.86rem;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:6px;transition:gap .3s ease;}
+.view-all{font-size:.86rem;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:6px;transition:gap .3s ease;text-decoration:none;}
 .view-all:hover{gap:11px;}
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
 .blog-card{border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);background:#fff;transition:all .3s ease;border:1px solid var(--grey-mid);}
@@ -135,7 +126,7 @@
 .bmeta{font-size:.76rem;color:var(--grey-text);display:flex;align-items:center;gap:5px;}
 .blog-body h3{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--dark);line-height:1.4;}
 .blog-body p{font-size:.83rem;color:var(--grey-text);line-height:1.6;margin-bottom:14px;}
-.blog-link{font-size:.83rem;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:6px;transition:gap .3s ease;}
+.blog-link{font-size:.83rem;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:6px;transition:gap .3s ease;text-decoration:none;}
 .blog-card:hover .blog-link{gap:11px;}
 
 /* ══ TESTIMONIALS ══ */
@@ -149,95 +140,32 @@
 .ta-name{font-size:.88rem;font-weight:700;color:var(--dark);}
 .ta-place{font-size:.77rem;color:var(--grey-text);}
 
-/* ══════════════════════════════════════
-   RESPONSIVE — Mobile, Tablet, Desktop
-   ══════════════════════════════════════ */
-
-/* Tablet: 769–1024px */
+/* Responsive */
 @media(min-width:769px) and (max-width:1024px){
   .why-grid{grid-template-columns:repeat(3,1fr);}
-  .why-inner{min-height:200px;}
-  .why-front,.why-back{min-height:200px;}
   .about-grid{gap:40px;}
-  .about-img{height:340px;}
-  .prod-grid-2{grid-template-columns:repeat(2,1fr);}
   .blog-grid{grid-template-columns:repeat(2,1fr);}
   .testi-grid{grid-template-columns:repeat(2,1fr);}
-  .quote-grid{gap:36px;}
 }
-
-/* Mobile large: 481–768px */
 @media(max-width:768px){
-  /* Hero */
   #hero{height:70vmax;min-height:380px;}
   .slide-content{padding:0 20px;max-width:100%;}
-  .slide-content h1{font-size:clamp(1.2rem,5.5vw,1.8rem);}
-  .slide-content p{font-size:.82rem;margin-bottom:16px;}
-  .slide-badge{font-size:.68rem;padding:5px 14px;}
-  /* Hide carousel arrows on small screens */
   .car-prev,.car-next{display:none !important;}
-
-  /* Sections */
   #about,#products,#why,#quote,#blog,#testi{padding:52px 0;}
-
-  /* About */
   .about-grid{grid-template-columns:1fr;gap:32px;}
   .about-img{height:240px;}
-  .about-badge{bottom:-14px;right:-6px;padding:12px 16px;}
-  .about-badge strong{font-size:1.7rem;}
-  .bullets-grid{grid-template-columns:1fr;}
-
-  /* Products */
   .prod-grid,.prod-grid-2,.prod-grid-1{grid-template-columns:1fr;}
-
-  /* Why — 2 columns on tablet-mobile */
   .why-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
-  .why-inner,.why-front,.why-back{min-height:200px;}
-  .why-front h3{font-size:.86rem;}
-  .why-back p{font-size:.78rem;}
-
-  /* Quote */
   .quote-grid{grid-template-columns:1fr;gap:32px;}
   .form-wrap{padding:22px;}
-
-  /* Blog */
   .blog-grid{grid-template-columns:1fr;}
-  .blog-hdr{flex-direction:column;align-items:flex-start;gap:10px;}
-
-  /* Testi */
   .testi-grid{grid-template-columns:1fr;}
-
-  /* Buttons in hero */
-  .slide-btns{gap:8px;}
-  .slide-btns .btn-primary,.slide-btns .btn-outline-white{
-    padding:10px 16px !important;font-size:.82rem !important;min-height:40px !important;min-width:160px !important;
-  }
+  .slide-btns .btn-primary,.slide-btns .btn-outline-white{padding:10px 16px !important;font-size:.82rem !important;min-height:40px !important;min-width:160px !important;}
 }
-
-/* Mobile small: up to 480px */
 @media(max-width:480px){
-  #hero{height:80vmax;min-height:340px;}
-  .slide-content h1{font-size:clamp(1.1rem,5.8vw,1.5rem);}
-  .slide-content p{display:none;}
-
-  /* Why — single column on very small */
   .why-grid{grid-template-columns:1fr;}
-  .why-inner,.why-front,.why-back{min-height:160px;}
-
-  /* Products */
-  .prod-grid,.prod-grid-2,.prod-grid-1{grid-template-columns:1fr;}
-
-  .testi-grid{grid-template-columns:1fr;}
-  .blog-grid{grid-template-columns:1fr;}
   .stats-grid{grid-template-columns:1fr 1fr;}
-  .about-img{height:200px;}
-
-  /* CTA banner buttons stack */
-  .cta-btns{flex-direction:column;align-items:center;}
-  .cta-btns .btn-primary,.cta-btns .btn-outline-white{width:100%;justify-content:center;max-width:320px;}
 }
-
-/* Touch device flip cards — tap to flip */
 @media(hover:none){
   .why-card.flipped .why-inner{transform:rotateY(180deg);}
   .why-card:hover .why-inner{transform:none;}
@@ -247,7 +175,7 @@
 <body>
 <div id="nav-placeholder"></div>
 
-<!-- ══════════════ HERO ══════════════ -->
+<!-- HERO CAROUSEL -->
 <section id="hero">
   <div class="slides" id="carousel">
     <div class="slide active">
@@ -290,7 +218,7 @@
       </div>
     </div>
     <div class="slide">
-      <div class="slide-bg" style="background-image:url('/home\ hero.jpg')"></div>
+      <div class="slide-bg" style="background-image:url('/home hero.jpg')"></div>
       <div class="slide-ov"></div>
       <div class="slide-content">
         <div class="slide-badge">Modern Living</div>
@@ -326,7 +254,7 @@
   </div>
 </div>
 
-<!-- ══════════════ PRODUCTS ══════════════ -->
+<!-- PRODUCTS SECTION -->
 <section id="products">
   <div class="container">
     <div class="fade-up" style="text-align:center">
@@ -344,7 +272,7 @@
       </div>
     </div>
     <div class="prod-grid-2 fade-up">
-      <div class="product-card" onclick="location.href='upvc.html#upvc-windows'">
+      <div class="product-card" data-product-url="upvc.html#upvc-windows">
         <div class="pc-img">
           <img src="/upvc windowshome/h1.jpg" alt="uPVC Windows"/>
           <div class="pc-overlay"></div>
@@ -356,7 +284,7 @@
           <span class="pc-link">View All Types <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
-      <div class="product-card" onclick="location.href='upvc.html#upvc-doors'">
+      <div class="product-card" data-product-url="upvc.html#upvc-doors">
         <div class="pc-img">
           <img src="/upvc windowshome/1.png" alt="uPVC Doors"/>
           <div class="pc-overlay"></div>
@@ -379,7 +307,7 @@
       </div>
     </div>
     <div class="prod-grid-2 fade-up">
-      <div class="product-card" onclick="location.href='aluminium.html#alum-windows'">
+      <div class="product-card" data-product-url="aluminium.html#alum-windows">
         <div class="pc-img">
           <img src="images index/aluminium window.png" alt="Aluminium Windows"/>
           <div class="pc-overlay"></div>
@@ -391,7 +319,7 @@
           <span class="pc-link">View All Types <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
-      <div class="product-card" onclick="location.href='aluminium.html#alum-doors'">
+      <div class="product-card" data-product-url="aluminium.html#alum-doors">
         <div class="pc-img">
           <img src="images index/aluminium door.jpg" alt="Aluminium Doors"/>
           <div class="pc-overlay"></div>
@@ -414,7 +342,7 @@
       </div>
     </div>
     <div class="prod-grid-1 fade-up">
-      <div class="product-card" onclick="location.href='fiber.html'">
+      <div class="product-card" data-product-url="fiber.html">
         <div class="pc-img">
           <img src="images index/fiber door.jpg" alt="Fiber Doors"/>
           <div class="pc-overlay"></div>
@@ -427,7 +355,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -443,7 +370,7 @@
   </div>
 </div>
 
-<!-- ══════════════ ABOUT ══════════════ -->
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="about-grid">
@@ -473,7 +400,7 @@
   </div>
 </section>
 
-<!-- ══════════════ WHY CHOOSE US — Flip Cards ══════════════ -->
+<!-- WHY CHOOSE US -->
 <section id="why">
   <div class="container">
     <div class="fade-up" style="text-align:center">
@@ -482,82 +409,16 @@
       <p class="section-sub" style="margin:0 auto 44px">We deliver more than just windows and doors — a complete experience built on quality, trust, and lasting relationships.</p>
     </div>
     <div class="why-grid" id="why-grid">
-
-      <div class="why-card fade-up">
-        <div class="why-inner">
-          <div class="why-front">
-            <div class="why-icon"><i class="fas fa-gem"></i></div>
-            <h3>High-Quality uPVC & Aluminium Materials</h3>
-          </div>
-          <div class="why-back">
-            <i class="fas fa-gem back-icon"></i>
-            <h3>Premium Materials</h3>
-            <p>Premium-grade materials sourced from certified manufacturers for superior performance and lasting durability.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="why-card fade-up">
-        <div class="why-inner">
-          <div class="why-front">
-            <div class="why-icon"><i class="fas fa-palette"></i></div>
-            <h3>Customized Design Solutions</h3>
-          </div>
-          <div class="why-back">
-            <i class="fas fa-palette back-icon"></i>
-            <h3>Tailored For You</h3>
-            <p>Every product tailored to your exact specifications — dimensions, colors, finishes & glass types to match your vision.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="why-card fade-up">
-        <div class="why-inner">
-          <div class="why-front">
-            <div class="why-icon"><i class="fas fa-hard-hat"></i></div>
-            <h3>Expert Installation Team</h3>
-          </div>
-          <div class="why-back">
-            <i class="fas fa-hard-hat back-icon"></i>
-            <h3>Flawless Installation</h3>
-            <p>Trained installation professionals ensuring a perfect fit, seamless sealing, and smooth operation every time.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="why-card fade-up">
-        <div class="why-inner">
-          <div class="why-front">
-            <div class="why-icon"><i class="fas fa-tags"></i></div>
-            <h3>Affordable Pricing with Best Value</h3>
-          </div>
-          <div class="why-back">
-            <i class="fas fa-tags back-icon"></i>
-            <h3>Factory-Direct Pricing</h3>
-            <p>Transparent, factory-direct pricing with no hidden costs. Premium quality delivered well within your budget.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="why-card fade-up">
-        <div class="why-inner">
-          <div class="why-front">
-            <div class="why-icon"><i class="fas fa-handshake"></i></div>
-            <h3>Trusted by Customers Across Coimbatore</h3>
-          </div>
-          <div class="why-back">
-            <i class="fas fa-handshake back-icon"></i>
-            <h3>5000+ Happy Clients</h3>
-            <p>Over 5,000 satisfied customers and growing — a reputation built on reliability, quality, and real results.</p>
-          </div>
-        </div>
-      </div>
-
+      <div class="why-card fade-up"><div class="why-inner"><div class="why-front"><div class="why-icon"><i class="fas fa-gem"></i></div><h3>High-Quality uPVC & Aluminium Materials</h3></div><div class="why-back"><i class="fas fa-gem back-icon"></i><h3>Premium Materials</h3><p>Premium-grade materials sourced from certified manufacturers for superior performance and lasting durability.</p></div></div></div>
+      <div class="why-card fade-up"><div class="why-inner"><div class="why-front"><div class="why-icon"><i class="fas fa-palette"></i></div><h3>Customized Design Solutions</h3></div><div class="why-back"><i class="fas fa-palette back-icon"></i><h3>Tailored For You</h3><p>Every product tailored to your exact specifications — dimensions, colors, finishes & glass types to match your vision.</p></div></div></div>
+      <div class="why-card fade-up"><div class="why-inner"><div class="why-front"><div class="why-icon"><i class="fas fa-hard-hat"></i></div><h3>Expert Installation Team</h3></div><div class="why-back"><i class="fas fa-hard-hat back-icon"></i><h3>Flawless Installation</h3><p>Trained installation professionals ensuring a perfect fit, seamless sealing, and smooth operation every time.</p></div></div></div>
+      <div class="why-card fade-up"><div class="why-inner"><div class="why-front"><div class="why-icon"><i class="fas fa-tags"></i></div><h3>Affordable Pricing with Best Value</h3></div><div class="why-back"><i class="fas fa-tags back-icon"></i><h3>Factory-Direct Pricing</h3><p>Transparent, factory-direct pricing with no hidden costs. Premium quality delivered well within your budget.</p></div></div></div>
+      <div class="why-card fade-up"><div class="why-inner"><div class="why-front"><div class="why-icon"><i class="fas fa-handshake"></i></div><h3>Trusted by Customers Across Coimbatore</h3></div><div class="why-back"><i class="fas fa-handshake back-icon"></i><h3>5000+ Happy Clients</h3><p>Over 5,000 satisfied customers and growing — a reputation built on reliability, quality, and real results.</p></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ QUOTE FORM ══════════════ -->
+<!-- QUOTE FORM -->
 <section id="quote">
   <div class="container">
     <div class="quote-grid">
@@ -572,33 +433,72 @@
           <div class="qf"><div class="qf-ico"><i class="fas fa-shield-alt"></i></div>No commitment required</div>
         </div>
       </div>
+
+      <!-- ══ QUOTE FORM ══ -->
       <div class="form-wrap fade-up" id="quote-form-section">
         <h3>Get Your Free Quote</h3>
         <div class="sub">Fill in the details and we'll reach out shortly.</div>
         <form id="quote-form">
           <div class="form-row">
-            <div class="form-group"><label>Full Name *</label><input type="text" placeholder="Your full name" required/></div>
-            <div class="form-group"><label>Phone *</label><input type="tel" placeholder="+91 XXXXX XXXXX" required/></div>
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" name="from_name" placeholder="Your full name" required/>
+            </div>
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/>
+            </div>
           </div>
-          <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"/></div>
-          <div class="form-group"><label>Product Interest</label>
-            <select>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="reply_to" placeholder="your@email.com"/>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" name="city" placeholder="Your city"/>
+            </div>
+            <div class="form-group">
+              <label>Project Type</label>
+              <select name="project_type">
+                <option value="">Select project type</option>
+                <option>Residential</option>
+                <option>Commercial</option>
+                <option>Renovation</option>
+                <option>New Construction</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Product Interest</label>
+            <select name="product">
               <option value="">Select a product</option>
-              <option>uPVC Windows</option><option>uPVC Doors</option>
-              <option>Aluminium Windows</option><option>Aluminium Doors</option>
-              <option>Fiber Doors</option><option>Multiple Products</option>
+              <option>uPVC Windows</option>
+              <option>uPVC Doors</option>
+              <option>Aluminium Windows</option>
+              <option>Aluminium Doors</option>
+              <option>Fiber Doors</option>
+              <option>Multiple Products</option>
             </select>
           </div>
-          <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project — size, quantity, location…"></textarea></div>
-          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px">Get Expert Solution <i class="fas fa-arrow-right"></i></button>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Tell us about your project — size, quantity, location…"></textarea>
+          </div>
+          <button type="submit" id="quote-submit-btn" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px">
+            Get Expert Solution <i class="fas fa-arrow-right"></i>
+          </button>
         </form>
         <div id="form-success" class="form-success">✅ Thank you! Our team will contact you within 24 hours.</div>
+        <div id="form-error" style="display:none;margin-top:12px;padding:12px 16px;background:#fff0f0;border:1px solid #ffcccc;border-radius:8px;color:#c0392b;font-size:.84rem;">
+          ❌ Something went wrong. Please call us directly at <strong>+91 97895 85081</strong>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ TESTIMONIALS ══════════════ -->
+<!-- TESTIMONIALS -->
 <section id="testi">
   <div class="container">
     <div class="fade-up" style="text-align:center">
@@ -613,7 +513,7 @@
   </div>
 </section>
 
-<!-- ══════════════ BLOG ══════════════ -->
+<!-- BLOG -->
 <section id="blog">
   <div class="container">
     <div class="blog-hdr fade-up">
@@ -665,39 +565,127 @@
 </div>
 
 <div id="footer-placeholder"></div>
+
+<!-- Lightbox Modal -->
+<div id="imageLightbox" class="lightbox-overlay">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Full view">
+</div>
+
 <script src="nav.js"></script>
 <script src="shared.js"></script>
 <script>
+// ── EmailJS INIT ──
+emailjs.init('x7GX6UgvExwSu4iUw');
+
 // ── CAROUSEL ──
-const slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dot');
-let cur=0,timer;
-function goTo(n){slides[cur].classList.remove('active');dots[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');dots[cur].classList.add('active');}
-function next(){goTo(cur+1);}
-function reset(){clearInterval(timer);timer=setInterval(next,4500);}
-document.getElementById('car-next').addEventListener('click',()=>{next();reset();});
-document.getElementById('car-prev').addEventListener('click',()=>{goTo(cur-1);reset();});
-dots.forEach(d=>d.addEventListener('click',()=>{goTo(+d.dataset.dot);reset();}));
+const slides = document.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('.dot');
+let cur = 0, timer;
+function goTo(n) {
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur = (n + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('active');
+}
+function next() { goTo(cur + 1); }
+function reset() { clearInterval(timer); timer = setInterval(next, 4500); }
+document.getElementById('car-next').addEventListener('click', () => { next(); reset(); });
+document.getElementById('car-prev').addEventListener('click', () => { goTo(cur - 1); reset(); });
+dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.dot); reset(); }));
 reset();
 
-// ── TOUCH SWIPE for carousel ──
-(function(){
-  const hero=document.getElementById('hero');
-  let sx=0;
-  hero.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; },{passive:true});
-  hero.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-sx;
-    if(Math.abs(dx)>50){ dx<0?next():goTo(cur-1); reset(); }
-  },{passive:true});
+// Touch swipe
+(function () {
+  const hero = document.getElementById('hero');
+  let sx = 0;
+  hero.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  hero.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) { dx < 0 ? next() : goTo(cur - 1); reset(); }
+  }, { passive: true });
 })();
 
-// ── FLIP CARDS: tap to flip on touch devices ──
-document.querySelectorAll('.why-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    if(window.matchMedia('(hover:none)').matches){
+// Flip cards tap for touch devices
+document.querySelectorAll('.why-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if (window.matchMedia('(hover:none)').matches) {
       card.classList.toggle('flipped');
     }
   });
 });
+
+// ── PRODUCT CARD / LIGHTBOX ──
+const lightbox        = document.getElementById('imageLightbox');
+const lightboxImgElem = document.getElementById('lightboxImg');
+const closeLightbox   = () => lightbox.classList.remove('active');
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+document.querySelectorAll('.product-card').forEach(card => {
+  const img         = card.querySelector('.pc-img img');
+  const viewLink    = card.querySelector('.pc-link');
+  const redirectUrl = card.getAttribute('data-product-url') || '#';
+
+  if (img) {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', e => {
+      e.stopPropagation();
+      lightboxImgElem.src = img.src;
+      lightbox.classList.add('active');
+    });
+  }
+
+  if (viewLink) {
+    viewLink.addEventListener('click', e => {
+      e.stopPropagation();
+      if (redirectUrl && redirectUrl !== '#') window.location.href = redirectUrl;
+    });
+  }
+
+  card.addEventListener('click', e => {
+    if (e.target.closest('.pc-link')) return;
+    if (e.target.closest('.pc-img img')) return;
+    e.preventDefault();
+  });
+});
+
+// ── QUOTE FORM — EmailJS ──
+const quoteForm  = document.getElementById('quote-form');
+const successMsg = document.getElementById('form-success');
+const errorMsg   = document.getElementById('form-error');
+const submitBtn  = document.getElementById('quote-submit-btn');
+
+if (quoteForm) {
+  quoteForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Hide previous messages
+    successMsg.style.display = 'none';
+    errorMsg.style.display   = 'none';
+
+    // Loading state
+    submitBtn.disabled    = true;
+    submitBtn.innerHTML   = 'Sending… <i class="fas fa-spinner fa-spin"></i>';
+
+    emailjs.sendForm('service_k4w2ua4', 'template_vzoenve', quoteForm)
+      .then(function () {
+        quoteForm.reset();
+        successMsg.style.display = 'block';
+        submitBtn.disabled  = false;
+        submitBtn.innerHTML = 'Get Expert Solution <i class="fas fa-arrow-right"></i>';
+        setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
+      })
+      .catch(function (error) {
+        console.error('EmailJS error:', error);
+        errorMsg.style.display  = 'block';
+        submitBtn.disabled  = false;
+        submitBtn.innerHTML = 'Get Expert Solution <i class="fas fa-arrow-right"></i>';
+        setTimeout(() => { errorMsg.style.display = 'none'; }, 8000);
+      });
+  });
+}
 </script>
 </body>
 </html>

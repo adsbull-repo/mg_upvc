@@ -9,40 +9,57 @@
 <style>
 .prod-intro{padding:80px 0 48px;background:#fff;}
 .prod-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-.prod-intro-img{width:100%;height:400px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md);}
+.prod-intro-img{width:100%;height:400px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md);cursor:pointer;}
 .types-section{padding:72px 0;background:var(--grey-light);}
 .types-head{text-align:center;margin-bottom:52px;}
 .type-divider{width:60px;height:4px;background:var(--primary);border-radius:2px;margin:14px auto 0;}
 .types-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-.type-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--grey-mid);transition:all .3s ease;}
+
+/* FIX: Images fully visible with contain, no cropping */
+.type-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--grey-mid);transition:all .3s ease;cursor:default;}
 .type-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg);border-color:transparent;}
-.tc-img{width:100%;height:200px;overflow:hidden;position:relative;}
-.tc-img img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease;}
-.type-card:hover .tc-img img{transform:scale(1.08);}
-.tc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(198,40,40,.5) 0%,transparent 65%);opacity:0;transition:opacity .3s ease;}
+.tc-img{width:100%;height:200px;overflow:hidden;position:relative;background:#f5f7fa;}
+.tc-img img{width:100%;height:100%;object-fit:contain;transition:transform .45s ease;padding:8px;cursor:pointer;}
+.type-card:hover .tc-img img{transform:scale(1.05);}
+.tc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(198,40,40,.3) 0%,transparent 65%);opacity:0;transition:opacity .3s ease;pointer-events:none;}
 .type-card:hover .tc-overlay{opacity:1;}
-.tc-body{padding:20px;}
+.tc-body{padding:10px 18px 18px;}
 .tc-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;font-size:.75rem;font-weight:700;margin-bottom:8px;}
 .tc-body h4{font-size:.97rem;font-weight:700;margin-bottom:6px;color:var(--dark);}
 .tc-body p{font-size:.82rem;color:var(--grey-text);line-height:1.6;}
+.tc-link{margin-top:12px;display:inline-flex;align-items:center;gap:6px;color:var(--primary);font-size:.73rem;font-weight:600;cursor:pointer;transition:gap 0.2s;}
+
 .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:44px;}
-.benefit-card{background:#fff;border-radius:12px;padding:28px;box-shadow:var(--shadow-sm);border-left:4px solid var(--primary);transition:all .3s ease;}
+.benefit-card{background:#fff;border-radius:12px;padding:28px;box-shadow:var(--shadow-sm);border-left:4px solid var(--primary);transition:all .3s ease;cursor:default;}
 .benefit-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
 .benefit-icon{width:52px;height:52px;background:#fce4e4;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
 .benefit-icon i{color:var(--primary);font-size:1.3rem;}
 .benefit-card h4{font-size:.95rem;font-weight:700;margin-bottom:7px;color:var(--dark);}
 .benefit-card p{font-size:.83rem;color:var(--grey-text);line-height:1.65;}
+
 .why-section{padding:72px 0;background:var(--primary);}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
 .why-pill{display:flex;align-items:center;gap:11px;padding:12px 16px;background:rgba(255,255,255,.12);border-radius:8px;color:#fff;font-size:.87rem;font-weight:500;border-left:3px solid rgba(255,255,255,.5);margin-bottom:10px;}
 .why-pill i{color:#ffcdd2;flex-shrink:0;}
-.why-img{width:100%;height:380px;object-fit:cover;border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.3);}
+.why-img{width:100%;height:380px;object-fit:cover;border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.3);cursor:pointer;}
+
 .compare-table{width:100%;border-collapse:collapse;margin-top:40px;}
 .compare-table th{background:var(--primary);color:#fff;padding:14px 18px;text-align:left;font-size:.88rem;}
 .compare-table td{padding:12px 18px;border-bottom:1px solid var(--grey-mid);font-size:.86rem;color:var(--dark-mid);}
 .compare-table tr:nth-child(even) td{background:var(--grey-light);}
 .compare-table tr:hover td{background:#fce4e4;}
 .check{color:#2e7d32;font-weight:700;} .cross{color:#c62828;font-weight:700;}
+
+/* Lightbox Modal */
+.lightbox-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.94);backdrop-filter:blur(12px);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;visibility:hidden;opacity:0;transition:visibility 0.2s, opacity 0.2s;}
+.lightbox-overlay.active{visibility:visible;opacity:1;}
+.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:2px solid rgba(255,255,255,0.2);}
+.lightbox-close{position:absolute;top:24px;right:32px;color:#fff;font-size:2rem;cursor:pointer;background:rgba(0,0,0,0.5);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:0.2s;}
+.lightbox-close:hover{background:var(--primary);transform:scale(1.05);}
+
+.tc-header{padding:14px 18px 6px;display:flex;align-items:center;gap:10px;}
+.tc-header h4{font-size:.97rem;font-weight:700;color:var(--dark);margin:0;}
+
 @media(max-width:900px){
   .prod-intro-grid,.why-grid{grid-template-columns:1fr;gap:36px;}
   .prod-intro-img,.why-img{height:260px;}
@@ -96,55 +113,50 @@
     </div>
     <div class="types-grid">
 
-      <div class="type-card fade-up" id="casement-aw">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">01</div>
+          <h4>Casement Windows</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminiumdoor/Casement Windows.png" alt="Aluminium Casement Windows"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">01</div>
-          <h4>Casement Windows</h4>
           <p>Top-quality hinged aluminium casement windows with multi-point espagnolette locks. Provides excellent ventilation and weather sealing for both homes and commercial buildings.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
 
-      <div class="type-card fade-up" id="sliding-aw">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">02</div>
+          <h4>Sliding Windows</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminiumdoor/Sliding Windows.png" alt="Aluminium Sliding Windows"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">02</div>
-          <h4>Sliding Windows</h4>
           <p>Smooth-running aluminium sliding windows with precision-engineered tracks and anti-lift security features. Perfect for apartments, offices, and wide wall openings.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
 
-      <div class="type-card fade-up" id="awning-aw">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">03</div>
+          <h4>Awning Windows</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminiumdoor/Awning Windows.png" alt="Aluminium Awning Windows"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">03</div>
-          <h4>Awning Windows</h4>
           <p>Bottom-hinged aluminium awning windows that allow ventilation while keeping rain out. Widely used in commercial buildings and modern residences.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
-
-
-<!-- 
-      <div class="type-card fade-up">
-        <div class="tc-img">
-          <img src="https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=500&q=80&fit=crop&auto=format" alt="Aluminium Louvre Windows"/>
-          <div class="tc-overlay"></div>
-        </div>
-        <div class="tc-body">
-          <div class="tc-num">06</div>
-          <h4>Louvre Windows</h4>
-          <p>Adjustable aluminium louvre blades that precisely control natural ventilation and privacy. Popular in industrial buildings, car parks, and tropical home designs.</p>
-        </div>
-      </div> -->
 
     </div>
   </div>
@@ -160,46 +172,14 @@
       <div class="type-divider"></div>
     </div>
     <div class="benefits-grid">
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-ruler-combined"></i></div>
-        <h4>Ultra-Slim Profiles</h4>
-        <p>Aluminium's exceptional strength allows frame widths as narrow as 38mm, maximising the glass-to-frame ratio for maximum light, views, and a clean modern aesthetic.</p>
-      </div>
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-dumbbell"></i></div>
-        <h4>High Structural Strength</h4>
-        <p>Grade 6063-T5 aluminium alloy withstands high wind loads and spans large openings without deflection — essential for tall buildings and wide commercial glazing.</p>
-      </div>
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-palette"></i></div>
-        <h4>200+ Colour Options</h4>
-        <p>Electrostatic powder coating in any RAL colour — from architectural silver to wood-grain — with guaranteed UV resistance for 20+ years without fading or peeling.</p>
-      </div>
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-water"></i></div>
-        <h4>Corrosion Resistant</h4>
-        <p>Aluminium naturally resists corrosion. Powder coating provides an additional protective barrier, making our windows suitable for coastal environments with high humidity and salt air.</p>
-      </div>
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-temperature-low"></i></div>
-        <h4>Thermal Break Technology</h4>
-        <p>Our thermal break aluminium profiles include a polyamide insulating strip that dramatically reduces heat conduction — improving energy efficiency without sacrificing slim aesthetics.</p>
-      </div>
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-        <h4>Large Span Capability</h4>
-        <p>Aluminium windows support much larger panel sizes than uPVC, enabling floor-to-ceiling glazing and panoramic windows that would be structurally impossible with other materials.</p>
-      </div>
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-recycle"></i></div>
-        <h4>Sustainable Material</h4>
-        <p>Aluminium is the world's most recycled construction material. 75% of all aluminium ever produced is still in use today — making it an environmentally responsible long-term investment.</p>
-      </div>
-      <div class="benefit-card fade-up">
-        <div class="benefit-icon"><i class="fas fa-tools"></i></div>
-        <h4>Low Maintenance</h4>
-        <p>Powder-coated aluminium windows require nothing more than periodic cleaning. No rust treatment, painting or sanding — ever. A truly maintenance-free window solution.</p>
-      </div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-ruler-combined"></i></div><h4>Ultra-Slim Profiles</h4><p>Aluminium's exceptional strength allows frame widths as narrow as 38mm, maximising the glass-to-frame ratio for maximum light, views, and a clean modern aesthetic.</p></div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-dumbbell"></i></div><h4>High Structural Strength</h4><p>Grade 6063-T5 aluminium alloy withstands high wind loads and spans large openings without deflection — essential for tall buildings and wide commercial glazing.</p></div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-palette"></i></div><h4>200+ Colour Options</h4><p>Electrostatic powder coating in any RAL colour — from architectural silver to wood-grain — with guaranteed UV resistance for 20+ years without fading or peeling.</p></div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-water"></i></div><h4>Corrosion Resistant</h4><p>Aluminium naturally resists corrosion. Powder coating provides an additional protective barrier, making our windows suitable for coastal environments with high humidity and salt air.</p></div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-temperature-low"></i></div><h4>Thermal Break Technology</h4><p>Our thermal break aluminium profiles include a polyamide insulating strip that dramatically reduces heat conduction — improving energy efficiency without sacrificing slim aesthetics.</p></div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-expand-arrows-alt"></i></div><h4>Large Span Capability</h4><p>Aluminium windows support much larger panel sizes than uPVC, enabling floor-to-ceiling glazing and panoramic windows that would be structurally impossible with other materials.</p></div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-recycle"></i></div><h4>Sustainable Material</h4><p>Aluminium is the world's most recycled construction material. 75% of all aluminium ever produced is still in use today — making it an environmentally responsible long-term investment.</p></div>
+      <div class="benefit-card fade-up"><div class="benefit-icon"><i class="fas fa-tools"></i></div><h4>Low Maintenance</h4><p>Powder-coated aluminium windows require nothing more than periodic cleaning. No rust treatment, painting or sanding — ever. A truly maintenance-free window solution.</p></div>
     </div>
   </div>
 </section>
@@ -238,12 +218,7 @@
     <div class="fade-up" style="overflow-x:auto;">
       <table class="compare-table">
         <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Aluminium Windows</th>
-            <th>uPVC Windows</th>
-            <th>Wood Windows</th>
-          </tr>
+          <tr><th>Feature</th><th>Aluminium Windows</th><th>uPVC Windows</th><th>Wood Windows</th></tr>
         </thead>
         <tbody>
           <tr><td>Profile Width</td><td><span class="check">✔ Ultra-slim (38mm)</span></td><td>Wider profiles</td><td>Moderate</td></tr>
@@ -273,6 +248,77 @@
 </div>
 
 <div id="footer-placeholder"></div>
-<script src="nav.js"></script><script src="shared.js"></script>
+
+<!-- Lightbox Modal -->
+<div id="imageLightbox" class="lightbox-overlay">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Full view">
+</div>
+
+<script src="nav.js"></script>
+<script src="shared.js"></script>
+<script>
+// ========== PRODUCT CARD FIXES for Aluminium Windows page ==========
+// 1. Image click → open lightbox (full image visible)
+// 2. "View Details" link click → redirect to contact/quote page
+// 3. Card background click → NO redirect
+
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImgElem = document.getElementById('lightboxImg');
+const closeLightbox = () => lightbox.classList.remove('active');
+
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+// Process all type cards (aluminium window types)
+document.querySelectorAll('.type-card').forEach(card => {
+  const img = card.querySelector('.tc-img img');
+  const viewLink = card.querySelector('.tc-link');
+  const redirectUrl = card.getAttribute('data-product-url') || 'contact.html#quote';
+  
+  // Image click: show full image in lightbox
+  if(img) {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightboxImgElem.src = img.src;
+      lightbox.classList.add('active');
+    });
+  }
+  
+  // "View Details" click: redirect ONLY
+  if(viewLink) {
+    viewLink.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = redirectUrl;
+    });
+  }
+  
+  // Card click (anywhere else) → do nothing (no redirect)
+  card.addEventListener('click', (e) => {
+    if(e.target.closest('.tc-link')) return;
+    if(e.target.closest('.tc-img img')) return;
+    e.preventDefault();
+  });
+});
+
+// Make intro image clickable for lightbox
+const introImg = document.querySelector('.prod-intro-img');
+if(introImg) {
+  introImg.addEventListener('click', () => {
+    lightboxImgElem.src = introImg.src;
+    lightbox.classList.add('active');
+  });
+}
+
+// Make why section image clickable
+const whyImg = document.querySelector('.why-img');
+if(whyImg) {
+  whyImg.addEventListener('click', () => {
+    lightboxImgElem.src = whyImg.src;
+    lightbox.classList.add('active');
+  });
+}
+</script>
 </body>
 </html>

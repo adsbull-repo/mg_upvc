@@ -9,36 +9,52 @@
 <style>
 .prod-intro{padding:80px 0 48px;background:#fff;}
 .prod-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-.prod-intro-img{width:100%;height:400px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md);}
+.prod-intro-img{width:100%;height:400px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-md);cursor:pointer;}
 .types-section{padding:72px 0;background:var(--grey-light);}
 .types-head{text-align:center;margin-bottom:52px;}
 .type-divider{width:60px;height:4px;background:var(--primary);border-radius:2px;margin:14px auto 0;}
 .types-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-.type-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--grey-mid);transition:all .3s ease;}
+
+/* FIX: Images fully visible with contain, no cropping */
+.type-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--grey-mid);transition:all .3s ease;cursor:default;}
 .type-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg);border-color:transparent;}
-.tc-img{width:100%;height:220px;overflow:hidden;position:relative;}
-.tc-img img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease;}
-.type-card:hover .tc-img img{transform:scale(1.08);}
-.tc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(198,40,40,.5) 0%,transparent 65%);opacity:0;transition:opacity .3s ease;}
+.tc-img{width:100%;height:220px;overflow:hidden;position:relative;background:#f5f7fa;}
+.tc-img img{width:100%;height:100%;object-fit:contain;transition:transform .45s ease;padding:8px;cursor:pointer;}
+.type-card:hover .tc-img img{transform:scale(1.05);}
+.tc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(198,40,40,.3) 0%,transparent 65%);opacity:0;transition:opacity .3s ease;pointer-events:none;}
 .type-card:hover .tc-overlay{opacity:1;}
-.tc-body{padding:20px;}
+.tc-body{padding:10px 18px 18px;}
 .tc-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;font-size:.75rem;font-weight:700;margin-bottom:8px;}
 .tc-body h4{font-size:1rem;font-weight:700;margin-bottom:7px;color:var(--dark);}
 .tc-body p{font-size:.82rem;color:var(--grey-text);line-height:1.6;}
+.tc-link{margin-top:12px;display:inline-flex;align-items:center;gap:6px;color:var(--primary);font-size:.73rem;font-weight:600;cursor:pointer;transition:gap 0.2s;}
+
 .why-alum{padding:72px 0;background:#1a1a1a;}
 .why-alum-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
 .alum-pill{display:flex;align-items:center;gap:11px;padding:12px 16px;background:rgba(255,255,255,.07);border-radius:8px;color:rgba(255,255,255,.88);font-size:.87rem;font-weight:500;border-left:3px solid var(--primary-light);margin-bottom:10px;}
-.alum-pill i{color:var(--primary-light);flex-shrink:0;}
-.why-img{width:100%;height:380px;object-fit:cover;border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.4);}
+.alum-pill i{color:#ef5350;flex-shrink:0;}
+.why-img{width:100%;height:380px;object-fit:cover;border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.4);cursor:pointer;}
 .apps-section{padding:72px 0;background:#fff;}
 .apps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px;}
-.app-card{text-align:center;padding:28px 16px;background:var(--grey-light);border-radius:14px;transition:all .3s ease;}
+.app-card{text-align:center;padding:28px 16px;background:var(--grey-light);border-radius:14px;transition:all .3s ease;cursor:default;}
 .app-card:hover{background:#fce4e4;transform:translateY(-5px);}
 .app-icon{width:60px;height:60px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff;font-size:1.4rem;}
 .app-card h4{font-size:.9rem;font-weight:700;color:var(--dark);}
 .benefit-wrap{margin-top:48px;background:#fff;border-radius:16px;padding:36px;box-shadow:var(--shadow-sm);}
 .benefit-wrap h3{font-size:1.15rem;font-weight:700;margin-bottom:20px;color:var(--dark);}
 .bene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+.benefit-pill{display:flex;align-items:center;gap:10px;background:var(--grey-light);padding:10px 16px;border-radius:60px;font-size:.82rem;font-weight:500;}
+
+/* Lightbox Modal */
+.lightbox-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.94);backdrop-filter:blur(12px);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;visibility:hidden;opacity:0;transition:visibility 0.2s, opacity 0.2s;}
+.lightbox-overlay.active{visibility:visible;opacity:1;}
+.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:2px solid rgba(255,255,255,0.2);}
+.lightbox-close{position:absolute;top:24px;right:32px;color:#fff;font-size:2rem;cursor:pointer;background:rgba(0,0,0,0.5);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:0.2s;}
+.lightbox-close:hover{background:var(--primary);transform:scale(1.05);}
+
+.tc-header{padding:14px 18px 6px;display:flex;align-items:center;gap:10px;}
+.tc-header h4{font-size:.97rem;font-weight:700;color:var(--dark);margin:0;}
+
 @media(max-width:900px){
   .prod-intro-grid,.why-alum-grid{grid-template-columns:1fr;gap:36px;}
   .prod-intro-img,.why-img{height:260px;}
@@ -92,41 +108,50 @@
     <div class="types-grid-3">
 
       <!-- Casement -->
-      <div class="type-card fade-up" id="casement-aw">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">01</div>
+          <h4>Casement Windows</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminium windowshome/1.png" alt="Aluminium Casement Windows"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">01</div>
-          <h4>Casement Windows</h4>
           <p>Side-hinged aluminium windows that offer maximum ventilation and clear outdoor views. Strong frames support large glass panels for modern interiors.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
 
       <!-- Sliding -->
-      <div class="type-card fade-up" id="sliding-aw">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">02</div>
+          <h4>Sliding Windows</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminium windowshome/2.png" alt="Aluminium Sliding Windows"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">02</div>
-          <h4>Sliding Windows</h4>
           <p>Space-saving horizontal sliding design with smooth movement. Ideal for compact areas, offices, and high-rise buildings.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
 
       <!-- Awning -->
-      <div class="type-card fade-up" id="awning-aw">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">03</div>
+          <h4>Awning Windows</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminium windowshome/3.png" alt="Aluminium Awning Windows"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">03</div>
-          <h4>Awning Windows</h4>
           <p>Top-hinged aluminium windows that allow ventilation even during light rain. Great for bathrooms, utility areas, and commercial buildings.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
     </div>
@@ -158,41 +183,50 @@
     <div class="types-grid-3">
 
       <!-- Casement Door -->
-      <div class="type-card fade-up" id="casement-ad">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">01</div>
+          <h4>Casement Doors</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminium windowshome/d1.png" alt="Aluminium Casement Doors"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">01</div>
-          <h4>Casement Doors</h4>
           <p>Classic hinged aluminium doors offering timeless design and strong weather sealing. Ideal for main entrances and residential use.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
 
       <!-- Sliding Door -->
-      <div class="type-card fade-up" id="sliding-ad">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">02</div>
+          <h4>Sliding Doors</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminium windowshome/d2.png" alt="Aluminium Sliding Doors"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">02</div>
-          <h4>Sliding Doors</h4>
           <p>Smooth-gliding aluminium doors ideal for saving space and creating wide, light-filled openings. Perfect for balconies and terraces.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
 
       <!-- Partition Door -->
-      <div class="type-card fade-up" id="partition-ad">
+      <div class="type-card fade-up" data-product-url="contact.html#quote">
+        <div class="tc-header">
+          <div class="tc-num">03</div>
+          <h4>Partition Doors</h4>
+        </div>
         <div class="tc-img">
           <img src="/aluminium windowshome/d3.png" alt="Aluminium Partition Doors"/>
           <div class="tc-overlay"></div>
         </div>
         <div class="tc-body">
-          <div class="tc-num">03</div>
-          <h4>Partition Doors</h4>
           <p>Elegant aluminium-framed glass partition doors — perfect for office interiors, conference rooms, and space division with a modern touch.</p>
+          <span class="tc-link">View Details <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
     </div>
@@ -260,6 +294,77 @@
 </div>
 
 <div id="footer-placeholder"></div>
-<script src="nav.js"></script><script src="shared.js"></script>
+
+<!-- Lightbox Modal -->
+<div id="imageLightbox" class="lightbox-overlay">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Full view">
+</div>
+
+<script src="nav.js"></script>
+<script src="shared.js"></script>
+<script>
+// ========== PRODUCT CARD FIXES for Aluminium page ==========
+// 1. Image click → open lightbox (full image visible)
+// 2. "View Details" link click → redirect to contact/quote page
+// 3. Card background click → NO redirect
+
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImgElem = document.getElementById('lightboxImg');
+const closeLightbox = () => lightbox.classList.remove('active');
+
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+// Process all type cards (windows and doors)
+document.querySelectorAll('.type-card').forEach(card => {
+  const img = card.querySelector('.tc-img img');
+  const viewLink = card.querySelector('.tc-link');
+  const redirectUrl = card.getAttribute('data-product-url') || 'contact.html#quote';
+  
+  // Image click: show full image in lightbox
+  if(img) {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightboxImgElem.src = img.src;
+      lightbox.classList.add('active');
+    });
+  }
+  
+  // "View Details" click: redirect ONLY
+  if(viewLink) {
+    viewLink.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = redirectUrl;
+    });
+  }
+  
+  // Card click (anywhere else) → do nothing (no redirect)
+  card.addEventListener('click', (e) => {
+    if(e.target.closest('.tc-link')) return;
+    if(e.target.closest('.tc-img img')) return;
+    e.preventDefault();
+  });
+});
+
+// Make intro image clickable for lightbox
+const introImg = document.querySelector('.prod-intro-img');
+if(introImg) {
+  introImg.addEventListener('click', () => {
+    lightboxImgElem.src = introImg.src;
+    lightbox.classList.add('active');
+  });
+}
+
+// Make why section image clickable
+const whyImg = document.querySelector('.why-img');
+if(whyImg) {
+  whyImg.addEventListener('click', () => {
+    lightboxImgElem.src = whyImg.src;
+    lightbox.classList.add('active');
+  });
+}
+</script>
 </body>
 </html>
